@@ -22,6 +22,11 @@ describe('App component', () => {
 	 	expect(wrapper.find('button')).to.have.length(1);
 	});
 
+	it('should render one table element', function() {
+	 	const wrapper = shallow(<App/>);
+	 	expect(wrapper.find('table')).to.have.length(1);
+	});
+
 	it('should have an initial state of loan size of null', function() {
 	 	const wrapper = shallow(<App/>);
 	 	expect(wrapper.instance().state.loanSize).to.be.null;

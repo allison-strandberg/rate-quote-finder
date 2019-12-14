@@ -10,13 +10,24 @@ class Form extends React.Component {
 			occupancy: "Primary",
 		};
 	}
+
 	handleInputChange = event => {
 		this.setState({ [event.target.id]: event.target.value});
 	};
 
 	handleSubmit = event => {
 		event.preventDefault();
-	}
+	};
+
+	validLoanSize = (loanSize) => {
+		return (parseInt(loanSize)) ? true : false
+	};
+
+	validCreditScore = (creditScore) => {
+		return ((parseInt(creditScore) >= 300) && 
+				(parseInt(creditScore) <= 850)) ? true : false
+	};
+
 	render() {
 		return (
 			<form>

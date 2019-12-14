@@ -1,8 +1,14 @@
 import { expect } from 'chai';
-import { initialState, formValues } from "./index";
+import { formValues } from "./formValues";
 import { SAVE_FORM } from "../actionTypes";
 
 describe("formValues reducer", function() {
+	const initialState = {
+		loanSize: null,
+		propertyType: "SingleFamily",
+		creditScore: null,
+		occupancy: "Primary",
+	}
 	const loanSize = 10000;
 	const propertyType = "MultiFamily";
 	const creditScore = 700;
@@ -36,7 +42,6 @@ describe("formValues reducer", function() {
 			propertyType,
 			creditScore,
 			occupancy,
-			rateQuotes,
 		}
 		const action = {
 			type: SAVE_FORM,

@@ -1,6 +1,6 @@
 import React from 'react';
-import Form from './Form';
-import { configure, shallow }  from 'enzyme';
+import { Form } from './Form';
+import { configure, shallow, mount }  from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -24,12 +24,12 @@ describe('Form component', function() {
 
 	it('should have an initial state of loan size of null', function() {
 	 	const wrapper = shallow(<Form/>);
-	 	expect(wrapper.instance().state.loanSize).to.be.null;
+	 	expect(wrapper.instance().state.loanSize).to.equal("");
 	});
 
 	it('should have an initial state of credit score of null', function() {
 	 	const wrapper = shallow(<Form/>);
-	 	expect(wrapper.instance().state.creditScore).to.be.null;
+	 	expect(wrapper.instance().state.creditScore).to.equal("");
 	});
 
 	it('should have an initial state of property type of "SingleFamily"', function() {

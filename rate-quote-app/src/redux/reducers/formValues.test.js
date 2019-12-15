@@ -4,9 +4,9 @@ import { SAVE_FORM } from "../actionTypes";
 
 describe("formValues reducer", function() {
 	const initialState = {
-		loanSize: null,
+		loanSize: "",
 		propertyType: "SingleFamily",
-		creditScore: null,
+		creditScore: "",
 		occupancy: "Primary",
 	}
 	const loanSize = 10000;

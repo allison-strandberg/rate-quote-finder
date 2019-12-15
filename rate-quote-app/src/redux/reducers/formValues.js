@@ -1,9 +1,9 @@
 import { SAVE_FORM } from "../actionTypes";
 
 export const formValues = (state = {
-	loanSize: null,
+	loanSize: "",
 	propertyType: "SingleFamily",
-	creditScore: null,
+	creditScore: "",
 	occupancy: "Primary",
 }, action) => {
 	switch (action.type) {

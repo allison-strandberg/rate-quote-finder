@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { saveForm } from '../redux/actions';
 
-class Form extends React.Component {
+export class Form extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loanSize: null,
+			loanSize: "",
 			propertyType: "SingleFamily",
-			creditScore: null,
+			creditScore: "",
 			occupancy: "Primary",
 		};
 	}
@@ -17,6 +19,11 @@ class Form extends React.Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
+		this.props.saveForm(this.state.loanSize,
+							this.state.propertyType,
+							this.state.creditScore,
+							this.state.occupancy
+		);
 	};
 
 	validLoanSize = (loanSize) => {
@@ -74,5 +81,8 @@ class Form extends React.Component {
 	}
 }
 
-export default Form;
+export default connect(
+	null,
+	{ saveForm }
+)(Form);
 

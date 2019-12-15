@@ -34,7 +34,8 @@ class Form extends React.Component {
 				<label htmlFor="loan-size">Loan Size</label>
 				<input 
 					id="loanSize" 
-					type="text" 
+					type="text"
+					value={this.state.loanSize} 
 					onChange={this.handleInputChange} 
 				/>
 				<label htmlFor="property-type">Property Type</label>
@@ -51,6 +52,7 @@ class Form extends React.Component {
 				<input
 					id="creditScore"
 					type="text"
+					value={this.state.creditScore}
 					onChange={this.handleInputChange}
 				/>
 				<label htmlFor="occupancy">Occupancy</label>

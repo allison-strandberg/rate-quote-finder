@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import * as reducers from "../reducers";
-import { saveForm } from "../actions";
-import { SAVE_FORM } from "../actionTypes";
+import { formValues } from "./formValues";
 
-export default combineReducers(reducers)
+export default combineReducers({
+	formValues,
+});

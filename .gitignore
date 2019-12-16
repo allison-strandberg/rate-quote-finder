@@ -45,4 +45,7 @@ psd
 thumb
 sketch
 
+# Authentication
+authKey.js
+
 # End of https://www.gitignore.io/api/react,macos

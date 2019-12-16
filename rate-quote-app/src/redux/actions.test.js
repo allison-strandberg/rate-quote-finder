@@ -1,5 +1,7 @@
 import React from "react";
-import { expect } from "chai";
+import { expect, use } from "chai";
+import nock from "nock";
+import chaiNock from "chai-nock";
 import { 
 	SAVE_FORM, 
 	REQUEST_QUOTES,
@@ -9,7 +11,11 @@ import {
 	saveForm,
 	requestQuotes,
 	receiveQuotes,
+	fetchQuotes,
 } from "./actions";
+import { authKey } from "../authKey";
+
+use(chaiNock);
 
 describe("actions", () => {
 	const loanSize = 10000;
@@ -60,6 +66,7 @@ describe("actions", () => {
 				propertyType,
 				creditScore,
 				occupancy,
+				isFetching: true
 			}
 		}
 		expect(
@@ -72,6 +79,7 @@ describe("actions", () => {
 			type: RECEIVE_QUOTES,
 			payload: {
 				rateQuotes,
+				isFetching: false
 			}
 		}
 		expect(

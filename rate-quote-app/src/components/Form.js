@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { saveForm } from '../redux/actions';
+import { saveForm, fetchQuotes } from '../redux/actions';
 
 export class Form extends React.Component {
 	constructor(props) {
@@ -20,6 +20,11 @@ export class Form extends React.Component {
 	handleSubmit = event => {
 		event.preventDefault();
 		this.props.saveForm(this.state.loanSize,
+							this.state.propertyType,
+							this.state.creditScore,
+							this.state.occupancy
+		);
+		this.props.fetchQuotes(this.state.loanSize,
 							this.state.propertyType,
 							this.state.creditScore,
 							this.state.occupancy
@@ -83,6 +88,6 @@ export class Form extends React.Component {
 
 export default connect(
 	null,
-	{ saveForm }
+	{ saveForm, fetchQuotes }
 )(Form);
 

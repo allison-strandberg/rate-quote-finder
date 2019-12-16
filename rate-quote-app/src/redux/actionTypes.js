@@ -1,2 +1,3 @@
 export const SAVE_FORM = "SAVE_FORM";
 export const REQUEST_QUOTES = "REQUEST_QUOTES";
+export const RECEIVE_QUOTES = "RECEIVE_QUOTES";

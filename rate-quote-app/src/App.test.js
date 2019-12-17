@@ -7,8 +7,8 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 describe('App component', function() {
-	it('should render one div element', function() {
+	it('should render two div elements', function() {
 	 	const wrapper = shallow(<App/>);
-	 	expect(wrapper.find('div')).to.have.length(1);
+	 	expect(wrapper.find('div')).to.have.length(2);
 	});
 });

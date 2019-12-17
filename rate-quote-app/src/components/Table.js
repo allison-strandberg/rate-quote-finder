@@ -23,8 +23,6 @@ export class Table extends React.Component {
 							(cell, cellIndex) => <td key={cellIndex}>{cell}</td>
 						)}</tr>
 					)}
-					<tr>
-					</tr>
 				</tbody>
 			</table>
 		);

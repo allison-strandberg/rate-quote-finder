@@ -9,7 +9,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <Form />
-        <Table />
+        <div className="table-wrapper">
+        	<Table />
+        </div>
       </div>
     );
   }

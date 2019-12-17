@@ -8,3 +8,14 @@ export const HEADER_LABELS = Object.freeze(
 	  "APR"
 	]
 );
+
+export const COLUMN_ORDER = Object.freeze(
+    [
+        "lenderName",
+        "loanType",
+        "interestRate",
+        "closingCosts",
+        "monthlyPayment",
+        "apr"
+    ]
+);

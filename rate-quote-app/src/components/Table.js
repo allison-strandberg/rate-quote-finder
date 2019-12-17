@@ -1,18 +1,45 @@
 import React from "react";
-import { HEADER_LABELS } from "../constants";
+import { connect } from 'react-redux';
+import { HEADER_LABELS, COLUMN_ORDER } from "../constants";
 
-export const Table = (props) => (
-	<table>
-		<thead>
-			<tr>
-				{HEADER_LABELS.map((label, index) => <th key={index}>{label}</th>)}
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-			</tr>
-		</tbody>
-	</table>
-);
+export class Table extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {	
+		return (
+			<table>
+				<thead>
+					<tr>
+						{HEADER_LABELS.map(
+							(label, index) => <th key={index}>{label}</th>
+						)}
+					</tr>
+				</thead>
+				<tbody>
+					{this.props.formattedTable.map(
+						(row, rowIndex) => <tr key={rowIndex}>
+						{row.map(
+							(cell, cellIndex) => <td key={cellIndex}>{cell}</td>
+						)}</tr>
+					)}
+					<tr>
+					</tr>
+				</tbody>
+			</table>
+		);
+	}
+}
 
-export default Table;
+const mapStateToProps = state => {
+	const { quotes } = state;
+	// formattedTable is a 2d array of table rows.
+    const formattedTable = quotes.rateQuotes.map(
+    	row => COLUMN_ORDER.map(column => row[column])
+    );
+	return {
+		formattedTable
+	}
+};
+
+export default connect(mapStateToProps)(Table);

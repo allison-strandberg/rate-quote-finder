@@ -91,3 +91,7 @@ label {
   display: grid;
   grid-template-columns: 1fr;
 }
+
+.spinner {
+  text-align: center;
+}

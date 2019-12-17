@@ -6,26 +6,32 @@ export class Table extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-	render() {	
-		return (
-			<table>
-				<thead>
-					<tr>
-						{HEADER_LABELS.map(
-							(label, index) => <th key={index}>{label}</th>
+	render() {
+		if (this.props.isFetching) {
+			return (
+				<p className="spinner">Fetching quotes...</p>
+			)
+		} else {	
+			return (
+				<table>
+					<thead>
+						<tr>
+							{HEADER_LABELS.map(
+								(label, index) => <th key={index}>{label}</th>
+							)}
+						</tr>
+					</thead>
+					<tbody>
+						{this.props.formattedTable.map(
+							(row, rowIndex) => <tr key={rowIndex}>
+							{row.map(
+								(cell, cellIndex) => <td key={cellIndex}>{cell}</td>
+							)}</tr>
 						)}
-					</tr>
-				</thead>
-				<tbody>
-					{this.props.formattedTable.map(
-						(row, rowIndex) => <tr key={rowIndex}>
-						{row.map(
-							(cell, cellIndex) => <td key={cellIndex}>{cell}</td>
-						)}</tr>
-					)}
-				</tbody>
-			</table>
-		);
+					</tbody>
+				</table>
+			);
+		};
 	}
 }
 
@@ -36,7 +42,8 @@ const mapStateToProps = state => {
     	row => COLUMN_ORDER.map(column => row[column])
     );
 	return {
-		formattedTable
+		formattedTable,
+		isFetching: quotes.isFetching
 	}
 };
 

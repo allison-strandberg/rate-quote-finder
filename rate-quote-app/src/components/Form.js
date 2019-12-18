@@ -53,6 +53,7 @@ export class Form extends React.Component {
 				<label htmlFor="property-type">Property Type</label>
 				<select 
 					id="propertyType"
+					value={this.state.propertyType}
 					onChange={this.handleInputChange}
 				>
 					<option value="SingleFamily">Single Family</option>
@@ -70,6 +71,7 @@ export class Form extends React.Component {
 				<label htmlFor="occupancy">Occupancy</label>
 				<select 
 					id="occupancy"
+					value={this.state.occupancy}
 					onChange={this.handleInputChange}
 				>
 					<option value="Primary">Primary</option>

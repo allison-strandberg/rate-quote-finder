@@ -6,11 +6,13 @@ import {
 	SAVE_FORM, 
 	REQUEST_QUOTES,
 	RECEIVE_QUOTES,
+	RECEIVE_FAILURE,
 } from "./actionTypes";
 import { 
 	saveForm,
 	requestQuotes,
 	receiveQuotes,
+	receiveFailure,
 	fetchQuotes,
 } from "./actions";
 import { authKey } from "../authKey";
@@ -82,8 +84,17 @@ describe("actions", () => {
 				isFetching: false
 			}
 		}
-		expect(
-			receiveQuotes(json)
-		).to.deep.equal(expectedAction);
+		expect(receiveQuotes(json)).to.deep.equal(expectedAction);
+	});
+
+	it("should create an action to receive failure", function() {
+		const expectedAction = {
+			type: RECEIVE_FAILURE,
+			payload: {
+				isFetching: false,
+				didFail: true
+			}
+		}
+		expect(receiveFailure()).to.deep.equal(expectedAction);
 	});
 });

@@ -2,6 +2,7 @@ import {
 	SAVE_FORM,
 	REQUEST_QUOTES,
 	RECEIVE_QUOTES,
+	RECEIVE_FAILURE
 } from "./actionTypes";
 import { authKey } from "../authKey";
 
@@ -34,6 +35,14 @@ export const receiveQuotes = (json) => ({
 	},
 });
 
+export const receiveFailure = () => ({
+	type: RECEIVE_FAILURE,
+	payload: {
+		isFetching: false,
+		didFail: true
+	}
+})
+
 export const fetchQuotes = (loanSize, propertyType, creditScore, occupancy) => {
 	return dispatch => {
 		dispatch(requestQuotes(loanSize, propertyType, creditScore, occupancy))
@@ -47,8 +56,15 @@ export const fetchQuotes = (loanSize, propertyType, creditScore, occupancy) => {
 			{headers: { Authorization: authKey } }
 		)
 			.then(
-				response => response.json(), 
-				error => console.log('An error occurred.', error))
-			.then(json => dispatch(receiveQuotes(json)))
+				response => {
+					if (!response.ok) {
+						dispatch(receiveFailure());
+					} else {
+						response.json()
+						.then(json => dispatch(receiveQuotes(json)));
+					}
+				}, 
+				error => console.log('An error occurred.', error)
+			)
 	}
 };

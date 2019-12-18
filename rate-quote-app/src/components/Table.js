@@ -11,6 +11,10 @@ export class Table extends React.Component {
 			return (
 				<p className="spinner">Fetching quotes...</p>
 			)
+		} else if (this.props.didFail) {
+			return (
+				<p className="spinner">Failed to fetch quotes.</p>
+			)
 		} else {	
 			return (
 				<table>
@@ -43,7 +47,8 @@ const mapStateToProps = state => {
     );
 	return {
 		formattedTable,
-		isFetching: quotes.isFetching
+		isFetching: quotes.isFetching,
+		didFail: quotes.didFail
 	}
 };
 

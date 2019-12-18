@@ -1,6 +1,7 @@
 import { 
 	REQUEST_QUOTES,
-	RECEIVE_QUOTES
+	RECEIVE_QUOTES,
+	RECEIVE_FAILURE
 } from "../actionTypes";
 
 export const quotes = (state = {
@@ -14,6 +15,7 @@ export const quotes = (state = {
 			});
 			break
 		case RECEIVE_QUOTES:
+		case RECEIVE_FAILURE:
 			return Object.assign({}, state, action.payload);
 			break
 		default:

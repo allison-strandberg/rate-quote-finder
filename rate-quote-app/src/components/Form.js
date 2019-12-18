@@ -10,6 +10,15 @@ export class Form extends React.Component {
 			propertyType: "SingleFamily",
 			creditScore: "",
 			occupancy: "Primary",
+			formValid: false,
+			touched: {
+				loanSize: false,
+				creditScore: false
+			},
+			valid: {
+				loanSize: false,
+				creditScore: false
+			}
 		};
 	}
 
@@ -31,13 +40,38 @@ export class Form extends React.Component {
 		);
 	};
 
-	validLoanSize = (loanSize) => {
-		return (parseInt(loanSize)) ? true : false
-	};
+	validField = (field = "", value = "") => {
+		switch (field) {
+			case "loanSize":
+				return (parseInt(value)) ? true : false
+				break
+			case "creditScore":
+				return ((parseInt(value) >= 300) && 
+						(parseInt(value) <= 850)) ? true : false
+				break
+			default:
+				return true
+		}
+	}
 
-	validCreditScore = (creditScore) => {
-		return ((parseInt(creditScore) >= 300) && 
-				(parseInt(creditScore) <= 850)) ? true : false
+	handleBlur = (field) => (event) => {
+		// Touched is true on blur from a field.
+		this.setState({
+			touched: { ...this.state.touched, [field]: true },
+		});
+		// Check if field is valid, then check if form is valid.
+		this.setState({
+			valid: { 
+				...this.state.valid, 
+				[field]: this.validField(field, this.state[field]) 
+			},
+		}, function() {
+			this.setState({
+				formValid: Object.keys(
+					this.state.valid).every(key => this.state.valid[key]
+				)
+			});
+		});
 	};
 
 	render() {
@@ -48,7 +82,14 @@ export class Form extends React.Component {
 					id="loanSize" 
 					type="text"
 					value={this.state.loanSize} 
-					onChange={this.handleInputChange} 
+					onChange={this.handleInputChange}
+					onBlur={this.handleBlur("loanSize")}
+					className={
+						(!this.state.valid.loanSize && 
+							this.state.touched.loanSize)
+							? "input-invalid"
+							: "input-valid"
+					}
 				/>
 				<label htmlFor="property-type">Property Type</label>
 				<select 
@@ -67,6 +108,13 @@ export class Form extends React.Component {
 					type="text"
 					value={this.state.creditScore}
 					onChange={this.handleInputChange}
+					onBlur={this.handleBlur("creditScore")}
+					className={
+						(!this.state.valid.creditScore && 
+							this.state.touched.creditScore)
+							? "input-invalid"
+							: "input-valid"
+					}
 				/>
 				<label htmlFor="occupancy">Occupancy</label>
 				<select 
@@ -79,8 +127,13 @@ export class Form extends React.Component {
 					<option value="Investment">Investment</option>
 				</select>
 				<button 
-					type="submit" 
+					type="submit"
+					disabled={!this.state.formValid}
 					onClick={this.handleSubmit}
+					className={this.state.formValid 
+								? "btn-valid"
+								: "btn-invalid"
+					}
 				>Quote Rates
 				</button>
 			</form>

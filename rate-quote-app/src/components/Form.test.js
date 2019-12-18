@@ -43,54 +43,52 @@ describe('Form component', function() {
 	});
 });
 
-describe('Directly invoking the validLoanSize method', function() {
-	it('should return true for input 10000', function() {
+describe('Directly invoking the validField method', function() {
+	it('should return true for a loan size of 10000', function() {
 		const wrapper = shallow(<Form/>);
 		const instance = wrapper.instance();
-		expect(instance.validLoanSize(10000)).to.be.true;
+		expect(instance.validField("loanSize", 10000)).to.be.true;
 	});
 
-	it('should return false for no input', function() {
+	it('should return false for no loan size', function() {
 		const wrapper = shallow(<Form/>);
 		const instance = wrapper.instance();
-		expect(instance.validLoanSize()).to.be.false;
+		expect(instance.validField("loanSize")).to.be.false;
 	});
 
-	it('should return false for input ""', function() {
+	it('should return false for a loan size of ""', function() {
 		const wrapper = shallow(<Form/>);
 		const instance = wrapper.instance();
-		expect(instance.validLoanSize("")).to.be.false;
+		expect(instance.validField("loanSize","")).to.be.false;
 	});
 
-	it('should return false for input "a million dollars"', function() {
+	it('should return false for a loan size of "a million dollars"', function() {
 		const wrapper = shallow(<Form/>);
 		const instance = wrapper.instance();
-		expect(instance.validLoanSize("a million dollars")).to.be.false;
-	});
-});
-
-describe('Directly invoking the validCreditScore method', function() {
-	it('should return true for input 300', function() {
-		const wrapper = shallow(<Form/>);
-		const instance = wrapper.instance();
-		expect(instance.validCreditScore(300)).to.be.true;
+		expect(instance.validField("loanSize", "a million dollars")).to.be.false;
 	});
 
-	it('should return true for input 850', function() {
+	it('should return true for a credit score of 300', function() {
 		const wrapper = shallow(<Form/>);
 		const instance = wrapper.instance();
-		expect(instance.validCreditScore(850)).to.be.true;
+		expect(instance.validField("creditScore", 300)).to.be.true;
 	});
 
-	it('should return false for input 299', function() {
+	it('should return true for a credit score of 850', function() {
 		const wrapper = shallow(<Form/>);
 		const instance = wrapper.instance();
-		expect(instance.validCreditScore(299)).to.be.false;
+		expect(instance.validField("creditScore", 850)).to.be.true;
 	});
 
-	it('should return false for input 851', function() {
+	it('should return false for a credit score of 299', function() {
 		const wrapper = shallow(<Form/>);
 		const instance = wrapper.instance();
-		expect(instance.validCreditScore(851)).to.be.false;
+		expect(instance.validField("creditScore", 299)).to.be.false;
+	});
+
+	it('should return false for a credit score of 851', function() {
+		const wrapper = shallow(<Form/>);
+		const instance = wrapper.instance();
+		expect(instance.validField("creditScore", 851)).to.be.false;
 	});
 });

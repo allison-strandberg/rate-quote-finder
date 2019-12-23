@@ -28,14 +28,18 @@ export class Form extends React.Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
+
+		// FICO credit score maximum is 850, but API maximum is 800.
+		// Coerce values above 800 to 800.
+		const creditScore = Math.min(this.state.creditScore, 800);
 		this.props.saveForm(this.state.loanSize,
 							this.state.propertyType,
-							this.state.creditScore,
+							creditScore,
 							this.state.occupancy
 		);
 		this.props.fetchQuotes(this.state.loanSize,
 							this.state.propertyType,
-							this.state.creditScore,
+							creditScore,
 							this.state.occupancy
 		);
 	};

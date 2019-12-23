@@ -105,3 +105,15 @@ label {
 .input-invalid {
   border: 1px solid red;
 }
+
+.currency-symbol {
+/*  position: relative;
+  position: absolute;
+  display: block;*/
+  transform: translate(50%, 0);
+/*  top: 50%;
+  pointer-events: none;
+  width: 25px;
+  text-align: center;
+  font-style: normal;*/
+}

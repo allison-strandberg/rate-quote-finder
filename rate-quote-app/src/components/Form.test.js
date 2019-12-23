@@ -22,12 +22,12 @@ describe('Form component', function() {
 	 	expect(wrapper.find('button')).to.have.length(1);
 	});
 
-	it('should have an initial state of loan size of null', function() {
+	it('should have an initial state of loan size of $', function() {
 	 	const wrapper = shallow(<Form/>);
-	 	expect(wrapper.instance().state.loanSize).to.equal("");
+	 	expect(wrapper.instance().state.loanSize).to.equal("$");
 	});
 
-	it('should have an initial state of credit score of null', function() {
+	it('should have an empty initial state of credit score', function() {
 	 	const wrapper = shallow(<Form/>);
 	 	expect(wrapper.instance().state.creditScore).to.equal("");
 	});

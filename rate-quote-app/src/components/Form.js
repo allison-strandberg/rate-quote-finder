@@ -6,7 +6,7 @@ export class Form extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loanSize: "",
+			loanSize: "$",
 			propertyType: "SingleFamily",
 			creditScore: "",
 			occupancy: "Primary",
@@ -26,28 +26,43 @@ export class Form extends React.Component {
 		this.setState({ [event.target.id]: event.target.value});
 	};
 
+	handleLoanSizeChange = event => {
+		const value = (event.target.value[0] === "$")
+			? event.target.value
+			: "$" + event.target.value
+		this.setState({ loanSize: value});
+	};
+
 	handleSubmit = event => {
 		event.preventDefault();
 
+		const loanSize = (this.state.loanSize[0] === "$") 
+			? parseInt(this.state.loanSize.slice(1))
+			: parseInt(this.state.loanSize);
 		// FICO credit score maximum is 850, but API maximum is 800.
 		// Coerce values above 800 to 800.
 		const creditScore = Math.min(this.state.creditScore, 800);
-		this.props.saveForm(this.state.loanSize,
-							this.state.propertyType,
-							creditScore,
-							this.state.occupancy
+		this.props.saveForm(
+			loanSize,
+			this.state.propertyType,
+			creditScore,
+			this.state.occupancy
 		);
-		this.props.fetchQuotes(this.state.loanSize,
-							this.state.propertyType,
-							creditScore,
-							this.state.occupancy
+		this.props.fetchQuotes(
+			loanSize,
+			this.state.propertyType,
+			creditScore,
+			this.state.occupancy
 		);
 	};
 
 	validField = (field = "", value = "") => {
 		switch (field) {
 			case "loanSize":
-				return (parseInt(value)) ? true : false
+				const dollarValue = (value[0] === "$")
+					? value.slice(1)
+					: value;
+				return (parseInt(dollarValue)) ? true : false
 				break
 			case "creditScore":
 				return ((parseInt(value) >= 300) && 
@@ -83,10 +98,11 @@ export class Form extends React.Component {
 			<form>
 				<label htmlFor="loan-size">Loan Size</label>
 				<input 
-					id="loanSize" 
+					id="loanSize"
 					type="text"
+					placeholder="$"
 					value={this.state.loanSize} 
-					onChange={this.handleInputChange}
+					onChange={this.handleLoanSizeChange}
 					onBlur={this.handleBlur("loanSize")}
 					className={
 						(!this.state.valid.loanSize && 

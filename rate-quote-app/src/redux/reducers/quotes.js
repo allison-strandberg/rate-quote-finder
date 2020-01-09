@@ -15,7 +15,6 @@ export const quotes = (state = {
 			});
 			break
 		case RECEIVE_QUOTES:
-		case RECEIVE_FAILURE:
 			action.payload.rateQuotes.map(quote => {
 				quote.interestRate = `${quote.interestRate.toFixed(3)}%`;
 				quote.closingCosts = `$${quote.closingCosts.toFixed()}`;
@@ -24,6 +23,9 @@ export const quotes = (state = {
 			});
 			return Object.assign({}, state, action.payload);
 			break
+		case RECEIVE_FAILURE:
+			return Object.assign({}, state, action.payload);
+			break			
 		default:
 			return state
 	}

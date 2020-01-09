@@ -1,11 +1,13 @@
 import { expect } from 'chai';
 import { 
 	REQUEST_QUOTES,
-	RECEIVE_QUOTES
+	RECEIVE_QUOTES,
+	RECEIVE_FAILURE
 } from "../actionTypes";
 import {
 	requestQuotes,
-	receiveQuotes
+	receiveQuotes,
+	receiveFailure
 } from "../actions"
 import { quotes } from "./quotes";
 
@@ -62,6 +64,17 @@ describe("quotes reducer", function() {
 			rateQuotes: testJSON.rateQuotes,
 		}
 		const action = receiveQuotes(testJSON);
+		const reducerState = quotes(initialState, action);
+		expect(reducerState).to.deep.equal(expectedState);
+	});
+
+	it("should handle RECEIVE_FAILURE", function() {
+		const expectedState = {
+			isFetching: false,
+			didFail: true,
+			rateQuotes: []
+		}
+		const action = receiveFailure();
 		const reducerState = quotes(initialState, action);
 		expect(reducerState).to.deep.equal(expectedState);
 	});
